@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bna3l1ots42px"]
+
+[ext_resource type="Script" uid="uid://bukt1cuxewowu" path="res://maze/bingo/gem.gd" id="1_ss23j"]
+
+[node name="Gem" type="TextureRect"]
+script = ExtResource("1_ss23j")

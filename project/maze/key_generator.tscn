@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://ctg865rj416c2"]
+
+[node name="KeyGenerator" type="Marker2D"]

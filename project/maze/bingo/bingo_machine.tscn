@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://n5sidmfk0oxk"]
+
+[ext_resource type="Script" uid="uid://c70n00jw0y1yf" path="res://maze/bingo/bingo_machine.gd" id="1_f8xyr"]
+[ext_resource type="Texture2D" uid="uid://cl525xh5kvtbr" path="res://bingo_machine.png" id="1_u2mtu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8xyr"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f8xyr"]
+radius = 9.0
+
+[node name="BingoMachine" type="StaticBody2D"]
+script = ExtResource("1_f8xyr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u2mtu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_f8xyr")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_f8xyr")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

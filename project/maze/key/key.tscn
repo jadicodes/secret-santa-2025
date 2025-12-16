@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0ecv6brx7trp"]
+
+[ext_resource type="Texture2D" uid="uid://dcjxikcqml1r6" path="res://tile_0021.png" id="1_sa2qy"]
+[ext_resource type="Script" uid="uid://d4lh6uqbujp1q" path="res://maze/key/key.gd" id="1_vfkot"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sa2qy"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vfkot"]
+radius = 4.0
+
+[node name="Key" type="StaticBody2D"]
+modulate = Color(0, 0, 1, 1)
+script = ExtResource("1_vfkot")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_sa2qy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sa2qy")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_vfkot")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
