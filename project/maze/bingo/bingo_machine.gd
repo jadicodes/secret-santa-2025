@@ -13,9 +13,9 @@ func get_bingo_numbers() -> BingoEntry:
 func _roll_rarity() -> int:
 	var roll := randi() % 100
 
-	if roll < 40:
+	if roll < 50:
 		return 0   # COMMON
-	elif roll < 60:
+	elif roll < 80:
 		return 1   # UNCOMMON
 	elif roll < 93:
 		return 2   # RARE

@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0ecv6brx7trp"]
+[gd_scene load_steps=8 format=3 uid="uid://c0ecv6brx7trp"]
 
-[ext_resource type="Texture2D" uid="uid://dcjxikcqml1r6" path="res://tile_0021.png" id="1_sa2qy"]
 [ext_resource type="Script" uid="uid://d4lh6uqbujp1q" path="res://maze/key/key.gd" id="1_vfkot"]
+[ext_resource type="Texture2D" uid="uid://dxil1cntassbb" path="res://key.png" id="2_vfkot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sa2qy"]
 radius = 3.0
@@ -9,12 +9,50 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_vfkot"]
 radius = 4.0
 
+[sub_resource type="Animation" id="Animation_vfkot"]
+resource_name = "levitate"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 1.4666667),
+"transitions": PackedFloat32Array(1, 0.93303436, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vna7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h0iky"]
+_data = {
+&"RESET": SubResource("Animation_vna7m"),
+&"levitate": SubResource("Animation_vfkot")
+}
+
 [node name="Key" type="StaticBody2D"]
-modulate = Color(0, 0, 1, 1)
+modulate = Color(0.85882354, 0.8352941, 0.67058825, 1)
 script = ExtResource("1_vfkot")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_sa2qy")
+texture = ExtResource("2_vfkot")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sa2qy")
@@ -23,5 +61,10 @@ shape = SubResource("CircleShape2D_sa2qy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_vfkot")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h0iky")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

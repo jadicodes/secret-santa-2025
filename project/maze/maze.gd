@@ -6,10 +6,16 @@ var _key: Key
 var _counter: int
 var _inventory: int = 100
 
+@onready var _keys_spawned_label = %KeysSpawnedLabel
+@onready var _bingo_machine_panel = %BingoMachinePanel
+@onready var _bingo_entry_label = %BingoEntryLabel
+@onready var _inventory_label = %InventoryLabel
+
 
 func _ready():
 	_determine_spawn_keys()
-	$CanvasLayer/Panel.hide()
+	_inventory_label.text = "You have collected " + str(_inventory) + " keys."
+	_bingo_machine_panel.hide()
 
 
 func _determine_spawn_keys():
@@ -30,22 +36,26 @@ func generate_key(pos):
 
 
 func replace_text(counter):
-	$CanvasLayer/Label.text = "Today, " + str(counter) + " keys spawned."
+	_keys_spawned_label.text = "Today, " + str(counter) + " keys spawned."
 
 
 func add_key_to_inventory(amount: int):
 	_inventory += amount
-	$CanvasLayer/InventoryLabel.text = "You have collected " + str(_inventory) + " keys."
+	_inventory_label.text = "You have collected " + str(_inventory) + " keys."
 
 
 func _on_bingo_machine_interacted_with() -> void:
-	$CanvasLayer/Panel.show()
+	_bingo_machine_panel.show()
 
 
 func _on_use_key_button_pressed() -> void:
 	if _inventory <= 0:
 		return
 	var bingo_entry = $BingoMachine.get_bingo_numbers()
-	$CanvasLayer/Panel/BingoEntryLabel.text = bingo_entry.get_bingo_name()
+	_bingo_entry_label.text = bingo_entry.get_bingo_name()
 	$BingoBoard.board.collect(bingo_entry.get_color(), bingo_entry.get_rarity())
 	add_key_to_inventory(-1)
+
+
+func _on_close_button_pressed() -> void:
+	%BingoMachinePanel.hide()
