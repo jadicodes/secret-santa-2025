@@ -7,6 +7,7 @@ var _counter: int
 var _keys: int = 100
 var _coins: int = 0
 var _bingo_entry: BingoEntry
+var _number_of_seconds: int = 10
 
 @onready var _keys_spawned_label = %KeysSpawnedLabel
 @onready var _bingo_machine_panel = %BingoMachinePanel
@@ -20,9 +21,13 @@ func _ready():
 	_determine_spawn_keys()
 	_set_keys_label()
 	_set_coins_label()
+	$Timer.wait_time = _number_of_seconds
+	$Timer.start()
 	_bingo_machine_panel.hide()
 	$Bed.interacted_with.connect(_on_bed_interacted_with)
 	$ShopWorker.interacted_with.connect(_on_shop_worker_interacted_with)
+	for wall in get_tree().get_nodes_in_group("wall"):
+		wall.interacted_with.connect(_on_walls_interacted_with)
 
 
 func _set_keys_label():
@@ -69,8 +74,10 @@ func _on_bingo_machine_interacted_with() -> void:
 
 
 func _on_bed_interacted_with() -> void:
-	for key in get_tree().get_nodes_in_group("key"):
-		key.queue_free()
+	_kill_keys()
+	for wall in get_tree().get_nodes_in_group("wall"):
+		wall.undisappear()
+	$Timer.stop()
 	_determine_spawn_keys()
 
 
@@ -93,8 +100,9 @@ func _on_close_button_pressed() -> void:
 
 
 func _on_sell_button_pressed() -> void:
-	add_coin_to_inventory(_bingo_entry.get_price())
-	_set_coins_label()
+	if _bingo_entry:
+		add_coin_to_inventory(_bingo_entry.get_price())
+		_set_coins_label()
 
 
 func _on_keep_button_pressed() -> void:
@@ -108,3 +116,19 @@ func _on_shop_worker_interacted_with() -> void:
 
 func _on_shop_close_button_pressed() -> void:
 	_shop_panel.hide()
+
+
+func _on_timer_timeout() -> void:
+	_keys_spawned_label.text = "The keys have disappeared..."
+	_kill_keys()
+
+
+func _kill_keys():
+	for key in get_tree().get_nodes_in_group("key"):
+		key.queue_free()
+
+
+func _on_walls_interacted_with():
+	for wall in get_tree().get_nodes_in_group("wall"):
+		wall.disappear()
+	$Timer.start()
