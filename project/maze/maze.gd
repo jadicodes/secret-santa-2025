@@ -5,7 +5,7 @@ const NUMBER: int = 5
 var _key: Key
 var _counter: int
 var _keys: int = 0
-var _coins: int = 0
+var _coins: int
 var _bingo_entry: BingoEntry
 var _number_of_seconds: int = 10
 var _spawn_key_percentage:= 3
@@ -32,10 +32,10 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	if $Timer.time_left <= 0:
-		$CanvasLayer/Label.hide()
+		%TimeLeftLabel.hide()
 	else:
-		$CanvasLayer/Label.show()
-		$CanvasLayer/Label.text = "You have " + str(int($Timer.time_left)) + " seconds left to collect keys."
+		%TimeLeftLabel.show()
+		%TimeLeftLabel.text = str(int($Timer.time_left))
 
 
 func _set_keys_label():
@@ -153,12 +153,20 @@ func _on_walls_interacted_with():
 func _on_shop_button_10_purchase_attempted(amount: Variant, _button) -> void:
 	if not _coins - amount < 0:
 		$Timer.wait_time += 5
-		add_coin_to_inventory(amount)
+		add_coin_to_inventory(-amount)
 		_set_coins_label()
 
 
 func _on_shop_button_9_purchase_attempted(amount: Variant, _button: Variant) -> void:
 		if not _coins - amount < 0:
 			_spawn_key_percentage += 2
-			add_coin_to_inventory(amount)
+			add_coin_to_inventory(-amount)
 			_set_coins_label()
+
+
+func _on_instructions_close_button_pressed() -> void:
+	$CanvasLayer/InstructionsPanel.hide()
+
+
+func _on_instructions_button_pressed() -> void:
+	$CanvasLayer/InstructionsPanel.show()
