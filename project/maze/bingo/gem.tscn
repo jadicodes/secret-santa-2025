@@ -1,6 +1,29 @@
 [gd_scene load_steps=2 format=3 uid="uid://bna3l1ots42px"]
 
-[ext_resource type="Script" uid="uid://bukt1cuxewowu" path="res://maze/bingo/gem.gd" id="1_ss23j"]
+[sub_resource type="GDScript" id="GDScript_5pnp0"]
+script/source = "class_name Gem
+extends TextureRect
+
+enum Colors {
+	RED,
+	YELLOW,
+	GREEN,
+	BLUE
+}
+
+@export var color_type: Colors
+
+
+func activate():
+	if color_type == Colors.RED:
+		modulate = Color.RED
+	if color_type == Colors.YELLOW:
+		modulate = Color.YELLOW
+	if color_type == Colors.GREEN:
+		modulate = Color.GREEN
+	if color_type == Colors.BLUE:
+		modulate = Color.BLUE
+"
 
 [node name="Gem" type="TextureRect"]
-script = ExtResource("1_ss23j")
+script = SubResource("GDScript_5pnp0")

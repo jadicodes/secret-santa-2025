@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxcljfmdv88id"]
+
+[ext_resource type="Script" uid="uid://d1ilv642dinof" path="res://maze/bingo/bingo_board/bingo_board.gd" id="1_dtf3s"]
+[ext_resource type="Script" uid="uid://byeq6vevspo7j" path="res://maze/bingo/bingo_board/bingo_tracker.gd" id="2_7vavq"]
+[ext_resource type="PackedScene" uid="uid://b6dxh1edbpxtw" path="res://maze/bingo/bingo_board/bingo_cell.tscn" id="2_dtf3s"]
+
+[sub_resource type="Resource" id="Resource_2qwhg"]
+script = ExtResource("2_7vavq")
+metadata/_custom_type_script = "uid://byeq6vevspo7j"
+
+[node name="BingoBoard" type="VBoxContainer"]
+offset_right = 76.0
+offset_bottom = 44.0
+script = ExtResource("1_dtf3s")
+board = SubResource("Resource_2qwhg")
+
+[node name="Row_0" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BingoCell" parent="Row_0" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+
+[node name="BingoCell2" parent="Row_0" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+rarity_type = 1
+
+[node name="BingoCell3" parent="Row_0" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+rarity_type = 2
+
+[node name="BingoCell4" parent="Row_0" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+rarity_type = 3
+
+[node name="Row_1" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BingoCell" parent="Row_1" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 1
+
+[node name="BingoCell2" parent="Row_1" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 1
+rarity_type = 1
+
+[node name="BingoCell3" parent="Row_1" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 1
+rarity_type = 2
+
+[node name="BingoCell4" parent="Row_1" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 1
+rarity_type = 3
+
+[node name="Row_2" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BingoCell" parent="Row_2" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 2
+
+[node name="BingoCell2" parent="Row_2" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 2
+rarity_type = 1
+
+[node name="BingoCell3" parent="Row_2" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 2
+rarity_type = 2
+
+[node name="BingoCell4" parent="Row_2" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 2
+rarity_type = 3
+
+[node name="Row_3" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="BingoCell" parent="Row_3" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 3
+
+[node name="BingoCell2" parent="Row_3" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 3
+rarity_type = 1
+
+[node name="BingoCell3" parent="Row_3" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 3
+rarity_type = 2
+
+[node name="BingoCell4" parent="Row_3" instance=ExtResource("2_dtf3s")]
+layout_mode = 2
+color_type = 3
+rarity_type = 3

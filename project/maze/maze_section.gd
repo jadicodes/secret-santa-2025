@@ -4,7 +4,7 @@ extends Node2D
 const NUMBER: int = 5
 var _key: Key
 var _counter: int
-var _inventory: int = 0
+var _inventory: int = 100
 
 
 func _ready():
@@ -45,5 +45,7 @@ func _on_bingo_machine_interacted_with() -> void:
 func _on_use_key_button_pressed() -> void:
 	if _inventory <= 0:
 		return
-
+	var bingo_entry = $BingoMachine.get_bingo_numbers()
+	$CanvasLayer/Panel/BingoEntryLabel.text = bingo_entry.get_bingo_name()
+	$BingoBoard.board.collect(bingo_entry.get_color(), bingo_entry.get_rarity())
 	add_key_to_inventory(-1)
