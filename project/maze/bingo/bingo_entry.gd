@@ -22,3 +22,7 @@ func get_color() -> int:
 
 func get_rarity() -> int:
 	return rarity
+
+
+func get_price() -> int:
+	return Rarity.PRICES[rarity]

@@ -20,3 +20,10 @@ const TEXTURES := {
 	Type.RARE: preload("res://maze/bingo/tile_0040.png"),
 	Type.LEGENDARY: preload("res://maze/bingo/tile_0042.png")
 }
+
+const PRICES := {
+	Type.COMMON: 2,
+	Type.UNCOMMON: 3,
+	Type.RARE: 4,
+	Type.LEGENDARY: 8
+}

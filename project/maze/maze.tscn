@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://by6b52bea386w"]
+[gd_scene load_steps=13 format=4 uid="uid://by6b52bea386w"]
 
 [ext_resource type="Script" uid="uid://c51v76majpv36" path="res://maze/maze.gd" id="1_yrb0a"]
 [ext_resource type="Texture2D" uid="uid://ca7unj77t12wb" path="res://monochrome_tilemap_packed.png" id="2_58t2u"]
 [ext_resource type="StyleBox" uid="uid://cggsdff0c00ho" path="res://panel_theme.tres" id="2_ajl1b"]
 [ext_resource type="PackedScene" uid="uid://clns13evvlggi" path="res://player/player.tscn" id="3_ajl1b"]
 [ext_resource type="StyleBox" uid="uid://bfccqh50kn0hs" path="res://panel_pressed.tres" id="3_xclsx"]
+[ext_resource type="PackedScene" uid="uid://ch0h4uiclflsi" path="res://maze/shop_button.tscn" id="4_b4r5y"]
 [ext_resource type="PackedScene" uid="uid://dxcljfmdv88id" path="res://maze/bingo/bingo_board/bingo_board.tscn" id="4_xclsx"]
 [ext_resource type="PackedScene" uid="uid://ctg865rj416c2" path="res://maze/key/key_generator.tscn" id="5_b4r5y"]
 [ext_resource type="PackedScene" uid="uid://n5sidmfk0oxk" path="res://maze/bingo/bingo_machine.tscn" id="6_u6umn"]
@@ -448,18 +449,28 @@ text = "Today __ keys spawned"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel2" type="Panel" parent="CanvasLayer"]
-anchors_preset = 5
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -90.0
-offset_top = 23.0
-offset_right = 90.0
-offset_bottom = 48.0
+anchor_bottom = 1.0
+offset_left = -166.0
+offset_top = -24.0
+offset_right = 166.0
 grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("2_ajl1b")
 
-[node name="InventoryLabel" type="Label" parent="CanvasLayer/Panel2"]
+[node name="KeysLabel" type="Label" parent="CanvasLayer/HBoxContainer/Panel2"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -478,12 +489,44 @@ text = "You have __ keys."
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Panel3" type="Panel" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = ExtResource("2_ajl1b")
+
+[node name="CoinsLabel" type="Label" parent="CanvasLayer/HBoxContainer/Panel3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -11.5
+offset_right = 103.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "You have __ coins."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="BingoMachinePanel" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true
-offset_left = 148.0
-offset_top = 121.0
-offset_right = 448.0
-offset_bottom = 274.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -76.5
+offset_right = 150.0
+offset_bottom = 76.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_ajl1b")
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/BingoMachinePanel"]
@@ -566,6 +609,93 @@ theme_override_styles/pressed = ExtResource("3_xclsx")
 theme_override_styles/hover = ExtResource("3_xclsx")
 text = "Keep"
 
+[node name="ShopPanel" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.5
+offset_top = -76.5
+offset_right = 176.5
+offset_bottom = 76.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_ajl1b")
+
+[node name="Label" type="Label" parent="CanvasLayer/ShopPanel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -60.0
+offset_top = 5.0
+offset_right = 60.0
+offset_bottom = 19.0
+grow_horizontal = 2
+text = "Increase the odds of:"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -55.0
+offset_right = 152.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 32
+columns = 4
+
+[node name="ShopButton" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+price = 5
+
+[node name="ShopButton2" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+colors = 1
+price = 5
+
+[node name="ShopButton3" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+colors = 2
+price = 5
+
+[node name="ShopButton4" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+colors = 3
+price = 5
+
+[node name="ShopButton5" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+_is_rarity = true
+price = 5
+
+[node name="ShopButton6" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+rarity = 1
+_is_rarity = true
+price = 8
+
+[node name="ShopButton7" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+rarity = 2
+_is_rarity = true
+price = 10
+
+[node name="ShopButton8" parent="CanvasLayer/ShopPanel/GridContainer" instance=ExtResource("4_b4r5y")]
+layout_mode = 2
+rarity = 3
+_is_rarity = true
+price = 12
+
 [node name="CoinsLabel" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -627,6 +757,25 @@ position = Vector2(-27, -135)
 [node name="Bed" parent="." instance=ExtResource("9_xclsx")]
 position = Vector2(119, 126)
 
+[node name="COINSSHOPLabel" type="Label" parent="."]
+offset_left = 57.0
+offset_top = -146.0
+offset_right = 120.0
+offset_bottom = -132.0
+text = "COINS SHOP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="CanvasLayer/BingoMachinePanel/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/BingoMachinePanel/UseKeyButton" to="." method="_on_use_key_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BingoMachinePanel/SellButton" to="." method="_on_sell_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BingoMachinePanel/KeepButton" to="." method="_on_keep_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton2" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton3" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton4" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton5" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton6" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton7" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton8" to="." method="_on_shop_button_pressed"]
 [connection signal="interacted_with" from="BingoMachine" to="." method="_on_bingo_machine_interacted_with"]

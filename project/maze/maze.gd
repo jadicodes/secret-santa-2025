@@ -4,19 +4,31 @@ extends Node2D
 const NUMBER: int = 5
 var _key: Key
 var _counter: int
-var _inventory: int = 100
+var _keys: int = 100
+var _coins: int = 0
+var _bingo_entry: BingoEntry
 
 @onready var _keys_spawned_label = %KeysSpawnedLabel
 @onready var _bingo_machine_panel = %BingoMachinePanel
 @onready var _bingo_entry_label = %BingoEntryLabel
-@onready var _inventory_label = %InventoryLabel
+@onready var _keys_label = %KeysLabel
+@onready var _coins_label = %CoinsLabel
 
 
 func _ready():
 	_determine_spawn_keys()
-	_inventory_label.text = "You have " + str(_inventory) + " keys."
+	_set_keys_label()
+	_set_coins_label()
 	_bingo_machine_panel.hide()
 	$Bed.interacted_with.connect(_on_bed_interacted_with)
+
+
+func _set_keys_label():
+	_keys_label.text = "You have " + str(_keys) + " keys."
+
+
+func _set_coins_label():
+	_coins_label.text = "You have " + str(_coins) + " coins."
 
 
 func _determine_spawn_keys():
@@ -41,8 +53,13 @@ func replace_text(counter):
 
 
 func add_key_to_inventory(amount: int):
-	_inventory += amount
-	_inventory_label.text = "You have " + str(_inventory) + " keys."
+	_keys += amount
+	_set_keys_label()
+
+
+func add_coin_to_inventory(amount: int):
+	_coins += amount
+	_set_coins_label()
 
 
 func _on_bingo_machine_interacted_with() -> void:
@@ -56,13 +73,26 @@ func _on_bed_interacted_with() -> void:
 
 
 func _on_use_key_button_pressed() -> void:
-	if _inventory <= 0:
+	if _keys <= 0:
 		return
-	var bingo_entry = $BingoMachine.get_bingo_numbers()
-	_bingo_entry_label.text = bingo_entry.get_bingo_name()
-	$BingoBoard.board.collect(bingo_entry.get_color(), bingo_entry.get_rarity())
+	_bingo_entry = $BingoMachine.get_bingo_numbers()
+	_bingo_entry_label.text = _bingo_entry.get_bingo_name()
 	add_key_to_inventory(-1)
+
+
+func _on_shop_button_pressed(price: int) -> void:
+	if not _coins - price < 0:
+		add_coin_to_inventory(-price)
+		_set_coins_label()
 
 
 func _on_close_button_pressed() -> void:
 	%BingoMachinePanel.hide()
+
+
+func _on_sell_button_pressed() -> void:
+	add_coin_to_inventory(_bingo_entry.get_price())
+	_set_coins_label()
+
+func _on_keep_button_pressed() -> void:
+	$BingoBoard.board.collect(_bingo_entry.get_color(), _bingo_entry.get_rarity())
