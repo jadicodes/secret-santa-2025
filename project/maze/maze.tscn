@@ -518,6 +518,7 @@ vertical_alignment = 1
 
 [node name="BingoMachinePanel" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -612,6 +613,7 @@ layout_mode = 2
 
 [node name="ShopPanel" type="Panel" parent="CanvasLayer"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -729,6 +731,20 @@ theme_override_styles/pressed = ExtResource("3_xclsx")
 theme_override_styles/hover = ExtResource("3_xclsx")
 text = "X"
 
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 23.0
+offset_right = 124.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_styles/normal = ExtResource("2_ajl1b")
+text = "You have __ seconds left to collect keys."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CoinsLabel" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -820,6 +836,7 @@ position = Vector2(90, -104)
 position = Vector2(13, -41)
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Walls" type="Node" parent="."]
 
@@ -853,6 +870,7 @@ position = Vector2(0, 147)
 [connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton6" to="." method="_on_shop_button_pressed"]
 [connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton7" to="." method="_on_shop_button_pressed"]
 [connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton8" to="." method="_on_shop_button_pressed"]
+[connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton9" to="." method="_on_shop_button_9_purchase_attempted"]
 [connection signal="purchase_attempted" from="CanvasLayer/ShopPanel/GridContainer/ShopButton10" to="." method="_on_shop_button_10_purchase_attempted"]
 [connection signal="pressed" from="CanvasLayer/ShopPanel/ShopCloseButton" to="." method="_on_shop_close_button_pressed"]
 [connection signal="interacted_with" from="BingoMachine" to="." method="_on_bingo_machine_interacted_with"]

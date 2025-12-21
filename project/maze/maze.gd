@@ -4,10 +4,11 @@ extends Node2D
 const NUMBER: int = 5
 var _key: Key
 var _counter: int
-var _keys: int = 100
+var _keys: int = 0
 var _coins: int = 0
 var _bingo_entry: BingoEntry
 var _number_of_seconds: int = 10
+var _spawn_key_percentage:= 3
 
 @onready var _keys_spawned_label = %KeysSpawnedLabel
 @onready var _bingo_machine_panel = %BingoMachinePanel
@@ -29,6 +30,14 @@ func _ready():
 		wall.interacted_with.connect(_on_walls_interacted_with)
 
 
+func _process(_delta: float) -> void:
+	if $Timer.time_left <= 0:
+		$CanvasLayer/Label.hide()
+	else:
+		$CanvasLayer/Label.show()
+		$CanvasLayer/Label.text = "You have " + str(int($Timer.time_left)) + " seconds left to collect keys."
+
+
 func _set_keys_label():
 	_keys_label.text = "You have " + str(_keys) + " keys."
 
@@ -41,7 +50,7 @@ func _determine_spawn_keys():
 	_counter = 0
 	for key_generator in $Node.get_children():
 		var random = randi_range(0, 10)
-		if random > 4:
+		if random < _spawn_key_percentage:
 			_counter += 1
 			generate_key(key_generator.global_position)
 	replace_text(_counter)
@@ -141,7 +150,15 @@ func _on_walls_interacted_with():
 	$Timer.start()
 
 
-func _on_shop_button_10_purchase_attempted(amount: Variant) -> void:
-	$Timer.wait_time += 5
-	add_coin_to_inventory(amount)
-	_set_coins_label()
+func _on_shop_button_10_purchase_attempted(amount: Variant, _button) -> void:
+	if not _coins - amount < 0:
+		$Timer.wait_time += 5
+		add_coin_to_inventory(amount)
+		_set_coins_label()
+
+
+func _on_shop_button_9_purchase_attempted(amount: Variant, _button: Variant) -> void:
+		if not _coins - amount < 0:
+			_spawn_key_percentage += 2
+			add_coin_to_inventory(amount)
+			_set_coins_label()
