@@ -22,7 +22,6 @@ func _ready():
 	_set_keys_label()
 	_set_coins_label()
 	$Timer.wait_time = _number_of_seconds
-	$Timer.start()
 	_bingo_machine_panel.hide()
 	$Bed.interacted_with.connect(_on_bed_interacted_with)
 	$ShopWorker.interacted_with.connect(_on_shop_worker_interacted_with)
@@ -89,10 +88,14 @@ func _on_use_key_button_pressed() -> void:
 	add_key_to_inventory(-1)
 
 
-func _on_shop_button_pressed(price: int) -> void:
+func _on_shop_button_pressed(price: int, button: ShopButton) -> void:
 	if not _coins - price < 0:
 		add_coin_to_inventory(-price)
 		_set_coins_label()
+		if button.get_is_rarity():
+			$BingoMachine.upgrade_rarity(button.get_rarity(), 7)
+		else:
+			$BingoMachine.upgrade_color(button.get_color(), 7)
 
 
 func _on_close_button_pressed() -> void:
@@ -103,11 +106,15 @@ func _on_sell_button_pressed() -> void:
 	if _bingo_entry:
 		add_coin_to_inventory(_bingo_entry.get_price())
 		_set_coins_label()
+		_bingo_entry = null
+		_bingo_entry_label.text = " "
 
 
 func _on_keep_button_pressed() -> void:
 	if _bingo_entry:
 		$BingoBoard.board.collect(_bingo_entry.get_color(), _bingo_entry.get_rarity())
+		_bingo_entry = null
+		_bingo_entry_label.text = " "
 
 
 func _on_shop_worker_interacted_with() -> void:
@@ -132,3 +139,9 @@ func _on_walls_interacted_with():
 	for wall in get_tree().get_nodes_in_group("wall"):
 		wall.disappear()
 	$Timer.start()
+
+
+func _on_shop_button_10_purchase_attempted(amount: Variant) -> void:
+	$Timer.wait_time += 5
+	add_coin_to_inventory(amount)
+	_set_coins_label()

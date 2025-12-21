@@ -7,6 +7,7 @@
 [node name="ShopButton" type="VBoxContainer"]
 offset_right = 30.0
 offset_bottom = 40.0
+theme_override_constants/separation = 2
 script = ExtResource("1_asd2n")
 
 [node name="Label" type="Label" parent="."]
