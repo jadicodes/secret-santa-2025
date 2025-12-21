@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://n5sidmfk0oxk"]
 
-[ext_resource type="Script" uid="uid://c70n00jw0y1yf" path="res://maze/bingo/bingo_machine.gd" id="1_f8xyr"]
-[ext_resource type="Texture2D" uid="uid://cl525xh5kvtbr" path="res://maze/bingo/bingo_machine.png" id="1_u2mtu"]
+[ext_resource type="Script" uid="uid://c70n00jw0y1yf" path="res://maze/bingo/bingo_machine/bingo_machine.gd" id="1_f8xyr"]
+[ext_resource type="Texture2D" uid="uid://cl525xh5kvtbr" path="res://maze/bingo/bingo_machine/bingo_machine.png" id="1_u2mtu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f8xyr"]
 size = Vector2(10, 10)

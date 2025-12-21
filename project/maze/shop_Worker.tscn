@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6nkvs8o1mt3q"]
+
+[ext_resource type="Texture2D" uid="uid://c7uvb6v0epv2l" path="res://maze/shopworker1.png" id="1_337d5"]
+[ext_resource type="Script" uid="uid://b5lbrjjq44sis" path="res://maze/shop_worker.gd" id="1_ovjpo"]
+[ext_resource type="Texture2D" uid="uid://c43f3oy3bjna8" path="res://maze/shopworker2.png" id="2_ovjpo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6drle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_337d5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ovjpo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_6cjar"]
+resource_name = "levitate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8jynp"]
+_data = {
+&"levitate": SubResource("Animation_6cjar")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6kx0f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ipslo"]
+radius = 5.0990195
+
+[node name="ShopWorker" type="StaticBody2D"]
+script = ExtResource("1_ovjpo")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6drle")
+frame_progress = 0.40233484
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8jynp")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_6kx0f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ipslo")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

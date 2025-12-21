@@ -10,6 +10,7 @@ var _bingo_entry: BingoEntry
 
 @onready var _keys_spawned_label = %KeysSpawnedLabel
 @onready var _bingo_machine_panel = %BingoMachinePanel
+@onready var _shop_panel = %ShopPanel
 @onready var _bingo_entry_label = %BingoEntryLabel
 @onready var _keys_label = %KeysLabel
 @onready var _coins_label = %CoinsLabel
@@ -21,6 +22,7 @@ func _ready():
 	_set_coins_label()
 	_bingo_machine_panel.hide()
 	$Bed.interacted_with.connect(_on_bed_interacted_with)
+	$ShopWorker.interacted_with.connect(_on_shop_worker_interacted_with)
 
 
 func _set_keys_label():
@@ -94,5 +96,15 @@ func _on_sell_button_pressed() -> void:
 	add_coin_to_inventory(_bingo_entry.get_price())
 	_set_coins_label()
 
+
 func _on_keep_button_pressed() -> void:
-	$BingoBoard.board.collect(_bingo_entry.get_color(), _bingo_entry.get_rarity())
+	if _bingo_entry:
+		$BingoBoard.board.collect(_bingo_entry.get_color(), _bingo_entry.get_rarity())
+
+
+func _on_shop_worker_interacted_with() -> void:
+	_shop_panel.show()
+
+
+func _on_shop_close_button_pressed() -> void:
+	_shop_panel.hide()

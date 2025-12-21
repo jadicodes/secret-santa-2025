@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl525xh5kvtbr"
-path="res://.godot/imported/bingo_machine.png-9310d43f717eb5b752565541f0ce2045.ctex"
+uid="uid://c43f3oy3bjna8"
+path="res://.godot/imported/shopworker2.png-718c8b59b6dfff624d28c0422ef4ed2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://maze/bingo/bingo_machine.png"
-dest_files=["res://.godot/imported/bingo_machine.png-9310d43f717eb5b752565541f0ce2045.ctex"]
+source_file="res://maze/shopworker2.png"
+dest_files=["res://.godot/imported/shopworker2.png-718c8b59b6dfff624d28c0422ef4ed2c.ctex"]
 
 [params]
 
