@@ -14,8 +14,9 @@ var _inventory: int = 100
 
 func _ready():
 	_determine_spawn_keys()
-	_inventory_label.text = "You have collected " + str(_inventory) + " keys."
+	_inventory_label.text = "You have " + str(_inventory) + " keys."
 	_bingo_machine_panel.hide()
+	$Bed.interacted_with.connect(_on_bed_interacted_with)
 
 
 func _determine_spawn_keys():
@@ -41,11 +42,17 @@ func replace_text(counter):
 
 func add_key_to_inventory(amount: int):
 	_inventory += amount
-	_inventory_label.text = "You have collected " + str(_inventory) + " keys."
+	_inventory_label.text = "You have " + str(_inventory) + " keys."
 
 
 func _on_bingo_machine_interacted_with() -> void:
 	_bingo_machine_panel.show()
+
+
+func _on_bed_interacted_with() -> void:
+	for key in get_tree().get_nodes_in_group("key"):
+		key.queue_free()
+	_determine_spawn_keys()
 
 
 func _on_use_key_button_pressed() -> void:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6dxh1edbpxtw"]
 
 [ext_resource type="Script" uid="uid://cpw5ofvw035lw" path="res://maze/bingo/bingo_board/bingo_cell.gd" id="1_granv"]
-[ext_resource type="Texture2D" uid="uid://dcjxikcqml1r6" path="res://tile_0021.png" id="1_nh012"]
+[ext_resource type="Texture2D" uid="uid://dcjxikcqml1r6" path="res://maze/bingo/tile_0021.png" id="1_nh012"]
 
 [node name="BingoCell" type="TextureRect" groups=["bingo_cells"]]
 anchors_preset = 15

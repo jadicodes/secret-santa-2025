@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxil1cntassbb"
-path="res://.godot/imported/key.png-e8e8692bdca67e3f30183e8f067d8541.ctex"
+uid="uid://neop4jbhj8c6"
+path="res://.godot/imported/tile_0062.png-5a7867f1dae20f50573d0e11ef13619e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://key.png"
-dest_files=["res://.godot/imported/key.png-e8e8692bdca67e3f30183e8f067d8541.ctex"]
+source_file="res://maze/bingo/tile_0062.png"
+dest_files=["res://.godot/imported/tile_0062.png-5a7867f1dae20f50573d0e11ef13619e.ctex"]
 
 [params]
 

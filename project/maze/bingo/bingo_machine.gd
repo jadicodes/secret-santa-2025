@@ -32,7 +32,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		_interactable = false
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if not _interactable:
 		return
 	

@@ -1,13 +1,28 @@
 [gd_scene load_steps=8 format=3 uid="uid://c0ecv6brx7trp"]
 
 [ext_resource type="Script" uid="uid://d4lh6uqbujp1q" path="res://maze/key/key.gd" id="1_vfkot"]
-[ext_resource type="Texture2D" uid="uid://dxil1cntassbb" path="res://key.png" id="2_vfkot"]
+[ext_resource type="Texture2D" uid="uid://dxil1cntassbb" path="res://maze/key/key.png" id="2_vfkot"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sa2qy"]
 radius = 3.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vfkot"]
 radius = 4.0
+
+[sub_resource type="Animation" id="Animation_vna7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_vfkot"]
 resource_name = "levitate"
@@ -26,28 +41,13 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, -3), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_vna7m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0iky"]
 _data = {
 &"RESET": SubResource("Animation_vna7m"),
 &"levitate": SubResource("Animation_vfkot")
 }
 
-[node name="Key" type="StaticBody2D"]
+[node name="Key" type="StaticBody2D" groups=["key"]]
 modulate = Color(0.85882354, 0.8352941, 0.67058825, 1)
 script = ExtResource("1_vfkot")
 

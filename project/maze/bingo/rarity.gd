@@ -15,8 +15,8 @@ const DISPLAY_NAMES := {
 }
 
 const TEXTURES := {
-	Type.COMMON: preload("res://tile_0062.png"),
-	Type.UNCOMMON: preload("res://tile_0021.png"),
-	Type.RARE: preload("res://tile_0040.png"),
-	Type.LEGENDARY: preload("res://tile_0042.png")
+	Type.COMMON: preload("res://maze/bingo/tile_0062.png"),
+	Type.UNCOMMON: preload("res://maze/bingo/tile_0021.png"),
+	Type.RARE: preload("res://maze/bingo/tile_0040.png"),
+	Type.LEGENDARY: preload("res://maze/bingo/tile_0042.png")
 }

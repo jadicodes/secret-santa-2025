@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://t06q2xwxs12j"]
+
+[ext_resource type="Texture2D" uid="uid://bubj7o0gqqiyj" path="res://bed.png" id="1_uqio5"]
+[ext_resource type="Script" uid="uid://cpsgvshudywhw" path="res://maze/bed.gd" id="2_a2ede"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a2ede"]
+radius = 11.0
+
+[node name="Bed" type="Sprite2D"]
+texture = ExtResource("1_uqio5")
+script = ExtResource("2_a2ede")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a2ede")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
