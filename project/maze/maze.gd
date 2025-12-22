@@ -170,3 +170,7 @@ func _on_instructions_close_button_pressed() -> void:
 
 func _on_instructions_button_pressed() -> void:
 	$CanvasLayer/InstructionsPanel.show()
+
+
+func _on_bingo_board_completed() -> void:
+	$CanvasLayer/WinPanel.show()

@@ -1,6 +1,8 @@
 class_name BingoBoard
 extends VBoxContainer
 
+signal completed
+
 @export var board: BingoTracker
 
 func _ready():
@@ -19,3 +21,9 @@ func _on_cell_collected(color: int, rarity: int):
 	for cell in get_tree().get_nodes_in_group("bingo_cells"):
 		if cell.color_type == color and cell.rarity_type == rarity:
 			cell.set_collected(true)
+	if board.is_board_full():
+		_on_board_completed()
+
+
+func _on_board_completed():
+	completed.emit()
