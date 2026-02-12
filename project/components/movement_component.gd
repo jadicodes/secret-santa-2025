@@ -7,7 +7,6 @@ extends Node
 var _dir := Vector2.ZERO
 
 
-
 func set_dir(new_dir: Vector2) -> void:
 	_dir = new_dir
 
