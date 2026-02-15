@@ -1,20 +1,30 @@
-class_name MovementCompenent
+class_name MovementComponent
 extends Node
 
 @export var _body: CharacterBody2D
 @export var speed := 512.0
+@export var gravity := 1200.0
+@export var jump_force := 500.0
 
-var _dir := Vector2.ZERO
+var _dir: float = 0.0
+var _jump_requested: bool = false
 
 
-func set_dir(new_dir: Vector2) -> void:
-	_dir = new_dir
+func set_input(direction: float, jump: bool) -> void:
+	_dir = direction
+	_jump_requested = jump
 
 
-func update() -> void:
-	_body.velocity = _dir * speed
+func update(delta: float) -> void:
+	if not _body.is_on_floor():
+		_body.velocity.y += gravity * delta
+	else:
+		if _body.velocity.y > 0:
+			_body.velocity.y = 0
+
+	_body.velocity.x = _dir * speed
+
+	if _jump_requested and _body.is_on_floor():
+		_body.velocity.y = -jump_force
+
 	_body.move_and_slide()
-
-
-func set_speed(new_speed: float) -> void:
-	speed = new_speed
